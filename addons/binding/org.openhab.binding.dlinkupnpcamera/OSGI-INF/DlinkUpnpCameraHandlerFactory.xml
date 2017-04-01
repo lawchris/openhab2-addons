@@ -11,7 +11,8 @@
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="binding.dlinkupnpcamera">
 
    <implementation class="org.openhab.binding.dlinkupnpcamera.internal.DlinkUpnpCameraHandlerFactory"/>
-
+   <reference bind="setUpnpIOService" cardinality="1..1" interface="org.eclipse.smarthome.io.transport.upnp.UpnpIOService" name="UpnpIOService" policy="static" unbind="unsetUpnpIOService"/>
+   <reference bind="setDiscoveryServiceRegistry" cardinality="1..1" interface="org.eclipse.smarthome.config.discovery.DiscoveryServiceRegistry" name="DiscoveryServiceRegistry" policy="static" unbind="unsetDiscoveryServiceRegistry"/>
    <service>
       <provide interface="org.eclipse.smarthome.core.thing.binding.ThingHandlerFactory"/>
    </service>
