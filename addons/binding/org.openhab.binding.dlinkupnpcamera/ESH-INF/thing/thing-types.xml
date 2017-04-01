@@ -5,20 +5,61 @@
         xsi:schemaLocation="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0 http://eclipse.org/smarthome/schemas/thing-description-1.0.0.xsd">
 
     <!-- Sample Thing Type -->
-    <thing-type id="sample">
-        <label>DlinkUpnpCamera Binding Thing</label>
-        <description>Sample thing for DlinkUpnpCamera Binding</description>
+    <thing-type id="camera">
+        <label>Dlink Upnp Camera</label>
+        <description>Dlink Upnp camera represents a discovered camera</description>
 
         <channels>
-            <channel id="channel1" typeId="sample-channel"/>
+            <channel id="pan" typeId="pan"/>
+            <channel id="tilt" typeId="tilt"/>
+            <channel id="image" typeId="image"/>
+            <channel id="username" typeId="username"/>
+            <channel id="password" typeId="password"/>
         </channels>
+        
+        <config-description>
+            <parameter name="udn" type="text">
+                <label>Unique Device Name</label>
+                <description>The UDN identifies the camera.</description>
+                <required>true</required>
+            </parameter>
+
+            <parameter name="refresh" type="integer">
+                <label>Refresh interval</label>
+                <description>Specifies the refresh interval in seconds</description>
+                <default>30</default>
+            </parameter>
+        </config-description>
     </thing-type>
 
-    <!-- Sample Channel Type -->
-    <channel-type id="sample-channel">
-        <item-type>dlinkupnpcameraItem</item-type>
-        <label>DlinkUpnpCamera Binding Channel</label>
-        <description>Sample channel for DlinkUpnpCamera Binding</description>
+    <channel-type id="pan">
+        <item-type>Player</item-type>
+        <label>Pan</label>
+        <description>Rotate the camera to left or right</description>
+    </channel-type>
+    
+    <channel-type id="tilt">
+        <item-type>Player</item-type>
+        <label>Tilt</label>
+        <description>Tilt</description>
     </channel-type>
 
+    <channel-type id="image">
+        <item-type>Image</item-type>
+        <label>Image</label>
+        <description>Display an image from camera</description>
+    </channel-type>
+    
+    <channel-type id="username">
+        <item-type>String</item-type>
+        <label>username</label>
+        <description>username used for the camera</description>
+    </channel-type>
+    
+    <channel-type id="password">
+        <item-type>String</item-type>
+        <label>password</label>
+        <description>password used for the camera</description>
+    </channel-type>
+    
 </thing:thing-descriptions>
