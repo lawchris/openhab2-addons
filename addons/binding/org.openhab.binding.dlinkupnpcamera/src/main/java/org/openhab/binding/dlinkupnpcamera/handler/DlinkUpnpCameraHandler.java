@@ -21,6 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.eclipse.smarthome.config.discovery.DiscoveryServiceRegistry;
 import org.eclipse.smarthome.core.library.types.NextPreviousType;
+import org.eclipse.smarthome.core.library.types.OnOffType;
 import org.eclipse.smarthome.core.library.types.PlayPauseType;
 import org.eclipse.smarthome.core.library.types.StringType;
 import org.eclipse.smarthome.core.thing.ChannelUID;
@@ -35,6 +36,8 @@ import org.openhab.binding.dlinkupnpcamera.config.DlinkUpnpCameraConfiguration;
 import org.openhab.io.net.actions.Ping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import motionDetection.MotionDetection;
 
 /**
  * The {@link DlinkUpnpCameraHandler} is responsible for handling commands, which are
@@ -151,6 +154,8 @@ public class DlinkUpnpCameraHandler extends BaseThingHandler implements UpnpIOPa
                     logger.debug("Command not supported by the camera");
                 }
                 break;
+            case DETECTION:
+                activateMotionDetection(command);
             default:
                 // Nothing is done
         }
@@ -190,6 +195,18 @@ public class DlinkUpnpCameraHandler extends BaseThingHandler implements UpnpIOPa
                     // Nothing is done
             }
         }
+    }
+
+    private void activateMotionDetection(Command command) {
+        if (command instanceof OnOffType) {
+            MotionDetection motion = new MotionDetection(username, password, hostname);
+            if (command.toString() == "ON") {
+                motion.startDetection();
+            } else {
+                motion.interruptDetection();
+            }
+        }
+
     }
 
     @Override
@@ -253,7 +270,7 @@ public class DlinkUpnpCameraHandler extends BaseThingHandler implements UpnpIOPa
      *
      * @param string_url
      */
-    private void sendHttpRequest(String string_url) {
+    public void sendHttpRequest(String string_url) {
         Authenticator.setDefault(new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {

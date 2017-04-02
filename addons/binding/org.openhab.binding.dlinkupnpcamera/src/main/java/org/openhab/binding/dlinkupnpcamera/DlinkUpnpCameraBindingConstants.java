@@ -40,5 +40,6 @@ public class DlinkUpnpCameraBindingConstants {
     public final static String IMAGE = "image";
     public final static String USERNAME = "username";
     public final static String PASSWORD = "password";
+    public final static String DETECTION = "detection";
 
 }

@@ -12,6 +12,7 @@
         <channels>
             <channel id="pan" typeId="pan"/>
             <channel id="tilt" typeId="tilt"/>
+            <channel id="detection" typeId="detection"/>
             <channel id="image" typeId="image"/>
             <channel id="username" typeId="username"/>
             <channel id="password" typeId="password"/>
@@ -42,6 +43,12 @@
         <item-type>Player</item-type>
         <label>Tilt</label>
         <description>Tilt</description>
+    </channel-type>
+    
+    <channel-type id="detection">
+        <item-type>Switch</item-type>
+        <label>Detection</label>
+        <description>Detection</description>
     </channel-type>
 
     <channel-type id="image">
